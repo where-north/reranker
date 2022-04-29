@@ -141,7 +141,7 @@ def train(model):
 
         if args.local_rank in [0, -1]:
             auc_score, accuracy, report = evaluate(model, valid_loader)
-            early_stop = saver.save(auc_score, epoch, logger, model.module if args.local_rank != -1 else model)
+            early_stop = saver.save(accuracy, epoch, logger, model.module if args.local_rank != -1 else model)
             if early_stop:
                 break
             logger.info(f'epoch:{epoch + 1}/{args.epoch}, valid auc_score: {auc_score}')
